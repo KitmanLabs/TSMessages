@@ -244,7 +244,9 @@ canBeDismissedByUser:(BOOL)dismissingEnabled
         
         if (!image && [[current valueForKey:@"imageName"] length])
         {
-            image = [self bundledImageNamed:[current valueForKey:@"imageName"]];
+          // rolandg 2015-05-07 we have our images in the .xcassets file - so that will not work - was different in 0.9.11
+          // image = [self bundledImageNamed:[current valueForKey:@"imageName"]];
+          image = [UIImage imageNamed:[current valueForKey:@"imageName"]];
         }
         
         if (![TSMessage iOS7StyleEnabled])
