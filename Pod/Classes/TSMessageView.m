@@ -11,7 +11,8 @@
 #import "TSBlurView.h"
 #import "TSMessage.h"
 
-#define TSMessageViewMinimumPadding 5.0
+#define TSMessageViewMinimumPadding    5.0f
+#define TSMessageViewMinimumTopPadding 15.0f
 
 #define TSDesignFileName @"TSMessagesDefaultDesign"
 
@@ -179,6 +180,11 @@ static NSMutableDictionary *_notificationDesign;
 {
     // Adds 10 padding to to cover navigation bar
     return self.messagePosition == TSMessageNotificationPositionNavBarOverlay ? TSMessageViewMinimumPadding + 10.0f : TSMessageViewMinimumPadding;
+}
+
+- (CGFloat)topPadding
+{
+  return self.messagePosition == TSMessageNotificationPositionNavBarOverlay ? TSMessageViewMinimumTopPadding + 10.0f : TSMessageViewMinimumTopPadding;
 }
 
 - (id)initWithTitle:(NSString *)title
@@ -452,7 +458,7 @@ canBeDismissedByUser:(BOOL)dismissingEnabled
     CGFloat padding = [self padding];
     
     self.titleLabel.frame = CGRectMake(self.textSpaceLeft,
-                                       padding,
+                                       [self topPadding],
                                        screenWidth - padding - self.textSpaceLeft - self.textSpaceRight,
                                        0.0);
     [self.titleLabel sizeToFit];
@@ -473,7 +479,7 @@ canBeDismissedByUser:(BOOL)dismissingEnabled
         currentHeight = self.titleLabel.frame.origin.y + self.titleLabel.frame.size.height;
     }
     
-    currentHeight += padding;
+    currentHeight += [self topPadding];
     
     if (self.iconImageView)
     {
@@ -610,3 +616,4 @@ canBeDismissedByUser:(BOOL)dismissingEnabled
 }
 
 @end
+
