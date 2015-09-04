@@ -211,7 +211,6 @@ canBeDismissedByUser:(BOOL)dismissingEnabled
         _messagePosition = position;
         self.callback = callback;
         self.buttonCallback = buttonCallback;
-        self.accessibilityIdentifier = @"Error view";
       
         CGFloat screenWidth = self.viewController.view.bounds.size.width;
         CGFloat padding = [self padding];
@@ -245,7 +244,8 @@ canBeDismissedByUser:(BOOL)dismissingEnabled
             default:
                 break;
         }
-
+      
+        self.accessibilityIdentifier = [NSString stringWithFormat:@"%@ view", currentString];
         current = [notificationDesign valueForKey:currentString];
 
 
